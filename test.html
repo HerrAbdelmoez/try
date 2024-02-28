@@ -5,7 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .pdf-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .pdf-viewer {
+            border: none;
+            height: 500px;
+            width: 100%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,62 +54,53 @@
     <main>
         <section class="courses">
 
-            <h1 class="heading arabic">سمارت حدايق حلوان<span></span></h1>
-
             <!-- المراجعة الأولى -->
             <div class="box" data-name="المراجعة الأولي">
-                <div class="tutor">
-                    <img src="images/profile.jpg" class="image" alt="Tutor Image">
-                    <div class="info">
-                        <h3>Herr AbdelMo'ez</h3>
-                        <span>24 Feb</span>
-                    </div>
-                </div>
-                <div class="thumb">
-                    <a href="centers/+/واجب المراجعة الأولي.jpg">
-                        <img src="centers/+/واجب المراجعة الأولي.jpg" alt="المراجعة الأولي">
-                    </a>
-                    <span>الواجب</span>
-                </div>
-                <h3 class="title">المراجعة الأولي في المنهج</h3>
-                                <a href="الحصة الأخيرة.pdf">بب</a>
-
+                <!-- ... (your existing content) ... -->
                 <button class="inline-btn" onclick="openPDF('المراجعة الأولي.pdf')">Open PDF</button>
             </div>
             <!--  -->
 
             <!-- الحصة الأخيرة -->
             <div class="box" data-name="الحصة الأخيرة">
-                <div class="tutor">
-                    <img src="images/profile.jpg" class="image" alt="Tutor Image">
-                    <div class="info">
-                        <h3>Herr AbdelMo'ez</h3>
-                        <span>17 Feb</span>
-                    </div>
-                </div>
-                <div class="thumb">
-                    <a href="centers/+/واجب الحصة الأخيرة.jpg">
-                        <img src="centers/+/واجب الحصة الأخيرة.jpg" alt="الحصة الأخيرة">
-                    </a>
-                    <span>الواجب</span>
-                </div>
-                <h3 class="title">الحصة الأخيرة في المنهج</h3>
+                <!-- ... (your existing content) ... -->
                 <button class="inline-btn" onclick="openPDF('الحصة الأخيرة.pdf')">Open PDF</button>
             </div>
             <!--  -->
         </section>
     </main>
+
+    <div id="pdfModal" class="pdf-modal">
+        <div class="pdf-container">
+            <span class="close-btn" onclick="closePDF()">×</span>
+            <iframe id="pdfViewer" class="pdf-viewer"></iframe>
+        </div>
+    </div>
+
     <script>
         function openPDF(pdfName) {
-            // Replace 'your-pdf-file.pdf' with the actual path to your PDF file
             var pdfPath = pdfName;
+            var modal = document.getElementById('pdfModal');
+            var viewer = document.getElementById('pdfViewer');
+            
+            // Set the source of the iframe to the PDF file
+            viewer.src = pdfPath;
+            
+            // Display the modal
+            modal.style.display = 'flex';
+        }
 
-            // Open the PDF in a new tab
-            window.open(pdfPath, '_blank');
+        function closePDF() {
+            var modal = document.getElementById('pdfModal');
+            var viewer = document.getElementById('pdfViewer');
+            
+            // Clear the source of the iframe
+            viewer.src = '';
+            
+            // Hide the modal
+            modal.style.display = 'none';
         }
     </script>
-
-
 
 </body>
 
